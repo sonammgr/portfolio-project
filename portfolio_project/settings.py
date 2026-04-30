@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -117,5 +118,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-MEDIA_URL = 'media/'
+# This points to the "Dining Room" outside core
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# This points to your "Kitchen" outside core
+STATICFILES_DIRS = [
+    BASE_DIR / 'static', 
+]
+# Add this to ensure uploaded project images work too
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'

@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="container py-5 f1-reveal">
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+            <span class="tech-tag mb-3">{{ post.created_at|date:"F d, Y" }}</span>
+            <h1 class="hero-title" style="font-size: clamp(2.5rem, 8vw, 4.5rem);">{{ post.title }}</h1>
+            
+            {% if post.image %}
+                <div class="f1-clip-container mt-5 mb-5" style="clip-path: none; background: none;">
+                    <img src="{{ post.image.url }}" class="w-100" style="filter: grayscale(1); max-height: 550px; object-fit: cover; border-bottom: 3px solid var(--violet);">
+                </div>
+            {% endif %}
+
+            <div class="blog-body-text" style="text-transform: none; font-size: 1.1rem; line-height: 1.8; color: #222;">
+                {{ post.content|linebreaks }}
+            </div>
+
+            <div class="mt-5 pt-5 border-top-f1">
+                <a href="{% url 'blog' %}" class="tech-tag text-decoration-none">← RETURN TO BLOG ARCHIVE</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

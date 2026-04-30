@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="f1-reveal container py-5">
+    <h1 class="hero-title mb-5">BLOG</h1>
+    
+    <div class="row">
+        {% if posts %}
+            {% for post in posts %}
+            <div class="col-md-12 mb-5 pb-5 border-bottom-f1">
+                <div class="row align-items-center card border-0 bg-transparent flex-md-row">
+                    <div class="col-md-4">
+                        <div class="f1-clip-container">
+                            {% if post.image %}
+                                <img src="{{ post.image.url }}" class="f1-img" style="height: 300px;">
+                            {% else %}
+                                <div style="height: 300px; background: #111;"></div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-8 mt-4 mt-md-0">
+                        <span class="tech-tag">{{ post.created_at|date:"d . m . Y" }}</span>
+                        <h2 class="project-title">
+                            <a href="{% url 'blog_detail' post.slug %}" class="f1-link">{{ post.title }}</a>
+                        </h2>
+                        <p class="text-muted text-uppercase fw-bold small" style="letter-spacing: 0.1em; opacity: 0.7;">
+                            {{ post.excerpt|truncatechars:160 }}
+                        </p>
+                        <a href="{% url 'blog_detail' post.slug %}" class="tech-tag text-decoration-none mt-3" style="color: var(--violet);">READ BLOG ENTRY —></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12 py-5 text-center">
+                <p class="tech-tag">EMPTY ARCHIVE // NO BLOG POSTS FOUND</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

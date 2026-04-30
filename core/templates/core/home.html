@@ -1,0 +1,111 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="f1-reveal">
+    <section class="container py-5 my-5">
+        <span class="tech-tag">SYDNEY, AU // 2026</span>
+        <h1 class="hero-title">SITA<br><span class="hero-accent">THAPA</span></h1>
+        <p class="hero-subtitle">Python/Django Developer | Information Systems</p>
+    </section>
+
+    <section class="border-top-f1">
+        <div class="container py-5">
+            <h2 class="section-header">Technical Core</h2>
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <div class="skill-info d-flex justify-content-between">
+                        <span class="skill-name">Python</span>
+                        <span class="skill-name">75%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--p: 75%;"></div></div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="skill-info d-flex justify-content-between">
+                        <span class="skill-name">Django</span>
+                        <span class="skill-name">65%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--p: 65%;"></div></div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="skill-info d-flex justify-content-between">
+                        <span class="skill-name">HTML</span>
+                        <span class="skill-name">10%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--p: 10%;"></div></div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="skill-info d-flex justify-content-between">
+                        <span class="skill-name">CSS</span>
+                        <span class="skill-name">10%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="--p: 10%;"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="border-top-f1">
+        <div class="container py-5">
+            <h2 class="section-header">Selected Works</h2>
+            <div class="row">
+                {% for project in projects %}
+                <div class="col-md-6 mb-5">
+                    <div class="f1-card">
+                        <a href="{% url 'project_detail' project.id %}" class="f1-link text-decoration-none text-dark">
+                            <div class="f1-clip-container">
+                                {% if project.image %}
+                                    <img src="{{ project.image.url }}" class="f1-img" alt="{{ project.title }}">
+                                {% endif %}
+                            </div>
+                            <span class="tech-tag mt-3">{{ project.technologies }}</span>
+                            <h3 class="project-title fw-900">{{ project.title }}</h3>
+                        </a>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <p class="tech-tag">No projects found. Check Admin panel.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="border-top-f1 bg-black text-white">
+        <div class="container py-5">
+            <div class="row py-5">
+                <div class="col-md-5">
+                    <h2 class="hero-title text-white" style="font-size: clamp(3rem, 8vw, 5rem);">GET IN<br><span class="hero-accent">TOUCH</span></h2>
+                    
+                    <div class="contact-links mt-5">
+                        <div class="mb-4">
+                            <span class="tech-tag text-white-50">GITHUB</span>
+                            <a href="https://github.com/sonammgr" target="_blank" class="f1-link text-white text-lowercase fw-bold fs-5">github.com/sitathapa</a>
+                        </div>
+                        <div class="mb-4">
+                            <span class="tech-tag text-white-50">EMAIL</span>
+                            <a href="mailto:mgrsita2004@gmail.com" class="f1-link text-white text-lowercase fw-bold fs-5">mgrsita2004@gmail.com</a>
+                        </div>
+                        <div class="mb-4">
+                            <span class="tech-tag text-white-50">PHONE</span>
+                            <p class="text-white fw-bold fs-5">+61 404 079 989</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-7">
+                    <form method="POST" action="{% url 'contact' %}" class="contact-form mt-4 mt-md-0">
+                        {% csrf_token %}
+                        <input type="text" name="name" placeholder="NAME" class="f1-input" required>
+                        <input type="email" name="email" placeholder="EMAIL" class="f1-input" required>
+                        <input type="text" name="subject" placeholder="SUBJECT" class="f1-input" required>
+                        <textarea name="message" placeholder="MESSAGE" class="f1-input" rows="4" required></textarea>
+                        <button type="submit" class="f1-btn mt-3">SEND TRANSMISSION</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
